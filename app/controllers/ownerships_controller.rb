@@ -6,17 +6,23 @@ class OwnershipsController < ApplicationController
     # @itemが保存されていない場合、先に@itemを保存する
     results = RakutenWebService::Ichiba::Item.search(itemCode: @item.code)
  
-  @item = Item.new(read(results.first))
-  @item.save
-  end
+    @item = Item.new(read(results.first))
+    @item.save
+    end
   
-  #Want 関係として保存
-  if params[:type] == 'Want'
+    #Want 関係として保存
+    if params[:type] == 'Want'
     current_user.want(@item)
     flash[:success] = '商品を Want しました。'
-  end
+    end
   
-  redirect_back(fallback_location: root_path)
+    #have 関係として保存
+    if params[:type] == 'Have'
+    current_user.have(@item)
+    flash[:success] = '商品を Have しました。'
+    end
+  
+   redirect_back(fallback_location: root_path)
   end
 
   def destroy
@@ -25,8 +31,13 @@ class OwnershipsController < ApplicationController
     if params[:type] == 'Want'
       current_user.unwant(@item)
       flash[:success] = '商品の Want を解除しました。'
-  end
+    end
+  
+    if params[:type] == 'Have'
+      current_user.unhave(@item)
+      flash[:success] = '商品の Have を解除しました。'
+    end
   
   redirect_back(fallback_location: root_path)
-end
+  end
 end
