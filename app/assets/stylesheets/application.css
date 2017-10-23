@@ -75,20 +75,20 @@ p.item-title{
 }
 
 /* users */
-.user-profile.name{
+.user-profile .name{
    margin-bottom: 20px;
 }
-.user-profile.name h1{
+.user-profile .name h1{
   text-shadow: 1px 1px 1px #fff;
   font-weight: bold;
 }
-.user-profile.status ul {
+.user-profile .status ul {
   margin: 0 auto 10px;
   padding: 0;
   display: table;
 }
 
-.user-profile.status ul li {
+.user-profile .status ul li {
   width: 120px;
   padding: 5px 0;
   border-right: 1px solid #ddd;
